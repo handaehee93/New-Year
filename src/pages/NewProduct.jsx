@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import Button from '../components/ui/Button'
 import { uploadImage } from '../api/uploader'
-// import { addNewProduct } from '../api/firebase'
-// import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { addNewProduct } from '../api/firebase'
-// import useQueryData from '../hooks/useQueryData'
+
 
 export default function NewProduct() {
   const [product, setProduct] = useState({})
@@ -15,7 +13,7 @@ export default function NewProduct() {
   const [success, setSuccess] = useState(false)
 
   
-  // const {addProduct} = useQueryData()
+
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -30,14 +28,6 @@ export default function NewProduct() {
               setSuccess(null)
             },3000)
           })
-        // addNewProduct.mutate({product, url}, {
-        //   onSuccess: () => {
-        //     setSuccess('제품 등록 완료')
-        //     setTimeout(() => {
-        //       setSuccess(null)
-        //     }, 3000)
-        //   }
-        // })
       })
         .finally(() => {          
         setIsUpLoading(false)
