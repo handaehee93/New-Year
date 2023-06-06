@@ -1,7 +1,7 @@
-
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set, get,remove} from "firebase/database";
+import { getDatabase, ref, set, get} from "firebase/database";
+import { v4 as uuid} from 'uuid'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -59,5 +59,23 @@ const auth = getAuth();
           return {...user, isAdmin}
         }
         return user;
+    })
+  }
+
+
+    // firebase에 새로운 제품을 등록하는 함수
+  // 제품을 등록할 때 제품마다 고유한 id가 필요하므로 uuid 사용
+  // firebase에 데이터를 등록할 때는 set을 사용 
+  // product에 id를 추가해 주고, price를 받는 input의 value를 콘솔에 찍어 보면 string으로 나오므로 이걸 정수로 변환해 준다.
+  // options는 ,로 구분 되어 입력 받을 것이므로 split을 통해 ,로 구분되어 있는 것들을 배열로 저장을 해 준다.
+  export async function addNewProduct(product, imageURL) {
+    const id = uuid()
+    set(ref(database, `products/${id}`), {
+      ...product,
+      id,
+      price: parseInt(product.price),
+      image: imageURL,
+      options: product.options.split(','),
+      category: product.category
     })
   }
