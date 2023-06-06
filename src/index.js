@@ -10,6 +10,7 @@ import ProductDetail from './pages/ProductDetail';
 import NewProduct from './pages/NewProduct';
 import MyCart from './pages/MyCart';
 import NotFound from './pages/NotFound';
+import ProtectedRoute from './pages/ProtectedRoute';
 // import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -30,9 +31,9 @@ const router = createBrowserRouter([
         path: '/products/new',
         element:(
           // 그냥 requireAdmin만 입력해도 requireAdmin={true}와 똑같다.
-          // <ProtectedRoute requireAdmin={true}>
+          <ProtectedRoute requireAdmin={true}>
             <NewProduct />
-          // </ProtectedRoute>
+          </ProtectedRoute>
         )
       },
       {
@@ -42,9 +43,9 @@ const router = createBrowserRouter([
       {
         path: '/carts',
         element:(
-        // <ProtectedRoute>
+        <ProtectedRoute>
           <MyCart />
-        // </ProtectedRoute>
+        </ProtectedRoute>
         ),
       }
     ]
