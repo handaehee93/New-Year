@@ -20,15 +20,9 @@ const auth = getAuth();
   export async function login() {
     return signInWithPopup(auth, provider)
     .then((result) => {
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
       const user = result.user;
     }).catch((error) => {
       console.log(error)
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // const email = error.customData.email;
-      // const credential = GoogleAuthProvider.credentialFromError(error);
     });
   }
 
@@ -40,6 +34,7 @@ const auth = getAuth();
         .catch((error) => { })
   )}
 
+// 사용자의 state 변경 사항에 대한 함수
 // firebase의 onAuthStateChanged는 사용자가 로그인하거나 로그아웃 하거나 기존의 로그인 기록이 세션이 남아있을 때 호출 되고, 해당 User의 정보를 콜백함수의 인자로 받아오기 때문에 user정보로 뭘 하고 싶다면 콜백함수에서 해주면 된다.
   export function userStateChange(callback) {
     onAuthStateChanged(auth, async (user) => {
@@ -63,7 +58,7 @@ const auth = getAuth();
   }
 
 
-    // firebase에 새로운 제품을 등록하는 함수
+  // firebase에 새로운 제품을 등록하는 함수
   // 제품을 등록할 때 제품마다 고유한 id가 필요하므로 uuid 사용
   // firebase에 데이터를 등록할 때는 set을 사용 
   // product에 id를 추가해 주고, price를 받는 input의 value를 콘솔에 찍어 보면 string으로 나오므로 이걸 정수로 변환해 준다.
@@ -79,3 +74,15 @@ const auth = getAuth();
       category: product.category
     })
   }
+
+
+// firebase에 저장된 상품 데이터를 불러오는 함수
+    export async function getProducts () {
+      return get(ref(database, 'products'))
+        .then(snapshot => {
+          if(snapshot.exists()) {
+            return Object.values(snapshot.val())
+          }
+          return []
+        })
+    }
