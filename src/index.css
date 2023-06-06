@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* body태그 안의 id가 root인 div의 위치를 가운데로 조정 */
+  @apply flex flex-col items-center 
+}
+
+/* 현재 body태그 안에 id가 root인 div안에서 모든 컴포넌트가 렌더링이 되기 때문에 해당 div의 넓이를 지정해 준 것 */
+#root {
+  @apply w-full max-w-screen-2xl
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+
+}
+
+input {
+  @apply border border-gray-300 outline-none my-1 p-5
+
+}
