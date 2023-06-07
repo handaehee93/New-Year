@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 import UserInfo from './UserInfo'
 import Button from './ui/Button';
 import MyCart from '../pages/MyCart';
-import { UserContext } from './context/UserContext'
+import { UserContext } from '../context/UserContext'
+import Cart from './Cart'
+
 
 
 
@@ -17,7 +19,7 @@ export default function Navbar() {
 
 
   return (
-    <header className='flex justify-between border-b border-gray-300 p-2'>
+    <header className='flex justify-between border-b border-gray-300 p-4'>
       <Link to='/' className='flex items-center font-semibold text-4xl  text-logo '>
         <HiOutlineShoppingBag />
         <h1>Shopping</h1>
@@ -25,7 +27,7 @@ export default function Navbar() {
       <nav className='flex items-center gap-4 font-semibold'>
         <Link to='/products' >상품</Link>
         <div>카테고리</div>
-        {user && <Link to='/carts'><MyCart /></Link>}
+        {user && <Link to='/carts'><Cart /></Link>}
         <Link to='/products/new' className='text-3xl'>
           {user && user.isAdmin && <AiFillEdit />}
         </Link>

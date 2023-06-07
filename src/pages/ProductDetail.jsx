@@ -1,22 +1,26 @@
 import React, { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
-// import { AddUpdateToCart } from '../api/firebase'
-import { UserContext } from '../components/context/UserContext'
+import { UserContext } from '../context/UserContext'
+import { AddUpdateToCart } from '../api/firebase'
+
+
 export default function ProductDetail() {
   const navigate = useNavigate()
   // useLoacation을 활용하여 useParam으로 전달된 state를 받아 옴
   const {state: {
     product: { id, image, title, category,price, description, options }
   }} = useLocation()
+  
   const [selected, setSelected] = useState(options && options[0])
   
   const handleSelect = (e) => setSelected(e.target.value)
   
   const { user } = useContext(UserContext)
+  
   const handleClick = () => {
-    const cart = {id, image, title, price, quantity: 1 }
-    // AddUpdateToCart(user.uid, cart)
+    const cart = {id, image, title,  price, option: selected, quantity: 1 }
+    AddUpdateToCart(user.uid, cart)
     const answer = window.confirm(`상품이 장바구니에 담겼습니다.
     장바구니로 이동시하겠습니까?`)
     if( answer === true ) {

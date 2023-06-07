@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { UserContext } from '../components/context/UserContext'
+import { UserContext } from '../context/UserContext'
+
 
 
 // 해당 컴포넌트는 사용자가 로그인을 했는지 확인하고, 해당 사용자가 어드민 권한이 있는지 확인하는 컴포넌트다.

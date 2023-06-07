@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set, get} from "firebase/database";
+import { getDatabase, ref, set, get,remove} from "firebase/database";
 import { v4 as uuid} from 'uuid'
 
 const firebaseConfig = {
@@ -86,3 +86,24 @@ const auth = getAuth();
           return []
         })
     }
+
+// 장바구니
+
+// firebase의 장바구니에 목록을 추가하고 업데이트 하는 함수
+  export async function AddUpdateToCart (id, product) {
+    return set(ref(database, `carts/${id}/${product.id}`), product)
+  }
+
+// firebase에 저장된 장바구니 목록을 불러오는 함수, 사용자 마다 고유한 Id가 있고, 해당 Id에 저장된 장바구니 목록을 불러와야 하므로 인자로 Id가 들어 간다.
+    export async function getCart (id) {
+      return get(ref(database, `carts/${id}`))
+        .then(snapshot => {
+          const items = snapshot.val() || { }
+          return Object.values(items)
+        })
+    }
+
+// firebase의 장바구니의 목록을 삭제하는 함수
+  export async function removeFromCart (id, productId) {
+    return remove(ref(database, `carts/${id}/${productId}`))
+  }
