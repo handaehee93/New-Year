@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, { useContext, useState} from 'react'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { AiFillEdit } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -7,14 +7,14 @@ import Button from './ui/Button';
 import MyCart from '../pages/MyCart';
 import { UserContext } from '../context/UserContext'
 import Cart from './Cart'
-
-
+import { AiOutlineCaretDown } from 'react-icons/ai'
+import { AiOutlineCaretUp } from 'react-icons/ai'
 
 
 
 export default function Navbar() {
   const {user, login, logout} = useContext(UserContext)
-
+  const [isOpen, setIsOpen] = useState(false)
 
 
 
@@ -26,7 +26,26 @@ export default function Navbar() {
       </Link>
       <nav className='flex items-center gap-4 font-semibold'>
         <Link to='/products' >상품</Link>
-        <div>카테고리</div>
+        {/* <div className='relative inline-block'> */}
+          {/* <div className='cursor-pointer '></div> */}
+            <div className='relative flex flex-col items-center cursor-pointer'>
+              <div className='flex items-center' onClick={()=> setIsOpen((prev) => !prev)}>
+                카테고리
+                {!isOpen ? (
+                  <AiOutlineCaretDown />
+                ): (
+                  <AiOutlineCaretUp />
+                )}
+              </div>
+              {isOpen && (
+                <div className='z-20 absolute top-6 bg-logo w-full text-white text-center p-2'>
+                  <div className='hover:bg-blue-400'>남성</div>
+                  <div className='hover:bg-blue-400'>여성</div>
+                </div>
+              )}
+            </div>
+
+          {/* </div> */}
         {user && <Link to='/carts'><Cart /></Link>}
         <Link to='/products/new' className='text-3xl'>
           {user && user.isAdmin && <AiFillEdit />}
