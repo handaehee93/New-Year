@@ -9,14 +9,14 @@ export default function CartItem({product, user}) {
   const editprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
   const handlePlus = () => {
-    AddUpdateToCart(id, {...product, quantity: quantity + 1})
+    AddUpdateToCart(user.uid, {...product, quantity: quantity + 1})
 
   }
   const handleMinus = () => {
     if(quantity < 2) {
       return
     }
-    AddUpdateToCart(id, {...product, quantity: quantity -1 })
+    AddUpdateToCart(user.uid, {...product, quantity: quantity -1 })
   }
   const handleDelete = () => {
     removeFromCart(user.uid, id)

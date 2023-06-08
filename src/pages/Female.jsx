@@ -7,8 +7,7 @@ import ProductCard from '../components/ProductCard'
 
 export default function Female() {
   const {data:products} = useQuery(['products'], getProducts)
-  const femaleProduct = products && products.filter(product => product.category === '여성'
-  )
+  const femaleProduct = products && products.filter(product => product.category === '여성')
   return (
     <>
       <Banner />
