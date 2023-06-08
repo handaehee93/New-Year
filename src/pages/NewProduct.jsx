@@ -15,9 +15,9 @@ export default function NewProduct() {
   const [success, setSuccess] = useState(false)
 
   const queryClient = useQueryClient()
-  const addProduct = useMutation(({product, url}) => addNewProduct(product, url),{
-    onSuccess: () => queryClient.invalidateQueries(['products'])
-  })
+  // const addProduct = useMutation(({product, url}) => addNewProduct(product, url),{
+  //   onSuccess: () => queryClient.invalidateQueries(['products'])
+  // })
   
 
   
@@ -27,18 +27,18 @@ export default function NewProduct() {
     // 클라우디너리에 파일이 전달이 되면 url을 알려줄 것이고, firebase에 해당 파일의 url과 나머지 상품 정보들을 업로드
     uploadImage(file)
       .then((url) => {
-        addProduct.mutate({product, url}, {onSuccess: ()=> { 
-          setSuccess('제품 등록 완료')
-          setTimeout(() => {
-            setSuccess(null)
-          },3000)}})
-        // addNewProduct(product, url)
-        //   .then(() => {
-        //     setSuccess('제품 등록 완료')
-        //     setTimeout(() => {
-        //       setSuccess(null)
-        //     },3000)
-        //   })
+        // addProduct.mutate({product, url}, {onSuccess: ()=> { 
+        //   setSuccess('제품 등록 완료')
+        //   setTimeout(() => {
+        //     setSuccess(null)
+        //   },3000)}})
+        addNewProduct(product, url)
+          .then(() => {
+            setSuccess('제품 등록 완료')
+            setTimeout(() => {
+              setSuccess(null)
+            },3000)
+          })
       })
         .finally(() => {          
         setIsUpLoading(false)
