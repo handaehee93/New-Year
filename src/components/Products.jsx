@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCard from './ProductCard'
 import useQueryHook from '../hooks/useQueryHook'
 
 
 export default function Products() {
-
-
   const {productData} = useQueryHook()
   const {isLoading, error, data: products} = productData
+  const {currentPage, setCurrentPage} = useState(1)
+  
+  
   return (
     <>
       {isLoading && <p>로딩중</p>}

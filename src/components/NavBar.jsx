@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext, useEffect, useRef, useState} from 'react'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { AiFillEdit } from 'react-icons/ai'
 import { AiOutlineCaretDown } from 'react-icons/ai'
@@ -15,6 +15,15 @@ export default function Navbar() {
   const {user, login, logout} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false)
 
+  const dropdownRef = useRef()
+  useEffect(() => {
+    const clickOutSide = (e) => {
+      if(!dropdownRef.current?.contains(e.target)) setIsOpen(false)
+    }
+    document.addEventListener("mousedown", clickOutSide)
+    return () => document.removeEventListener("mousedown" , clickOutSide)
+  },[isOpen])
+  
   return (
     <header className='flex justify-between border-b border-gray-300 p-4'>
       <Link to='/' className='flex items-center font-semibold text-4xl  text-logo '>
@@ -32,8 +41,8 @@ export default function Navbar() {
                 <AiOutlineCaretUp />
                 )}
           </div>
-              {isOpen && (
-                <div className='z-20 flex flex-col absolute top-6 bg-logo w-full text-white text-center p-2'>
+          {isOpen && (
+                <div ref={dropdownRef} className='z-20 flex flex-col absolute top-6 bg-logo w-full text-white text-center p-2'>
                   <Link to='/products/male' className='hover:bg-blue-400'>남성</Link>
                   <Link to='/products/female' className='hover:bg-blue-400'>여성</Link>
                 </div>
