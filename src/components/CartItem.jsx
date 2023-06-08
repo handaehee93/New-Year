@@ -1,25 +1,26 @@
 import React from 'react'
-import { AddUpdateToCart } from '../api/firebase'
-import { removeFromCart } from '../api/firebase'
 import Button from './ui/Button'
+import useQueryHook from '../hooks/useQueryHook'
 
 
-export default function CartItem({product, user}) {
+export default function CartItem({product}) {
   const {id, image, option, title, quantity, price} = product
   const editprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
+  const {upadateCart, removeCart} = useQueryHook()
+
   const handlePlus = () => {
-    AddUpdateToCart(user.uid, {...product, quantity: quantity + 1})
+    upadateCart.mutate( {...product, quantity: quantity + 1})
 
   }
   const handleMinus = () => {
     if(quantity < 2) {
       return
     }
-    AddUpdateToCart(user.uid, {...product, quantity: quantity -1 })
+    upadateCart.mutate( {...product, quantity: quantity -1 })
   }
   const handleDelete = () => {
-    removeFromCart(user.uid, id)
+    removeCart.mutate(id)
   }
   return (
     <li className='flex justify-between my-2 items-center'>

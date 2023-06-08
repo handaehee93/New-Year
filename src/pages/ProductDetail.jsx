@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import { UserContext } from '../context/UserContext'
-import { AddUpdateToCart } from '../api/firebase'
+import useQueryHook from '../hooks/useQueryHook'
 
 
 export default function ProductDetail() {
+  const {upadateCart} =useQueryHook()
   const navigate = useNavigate()
   // useLoacation을 활용하여 useParam으로 전달된 state를 받아 옴
   const {state: {
@@ -19,8 +20,13 @@ export default function ProductDetail() {
   const { user } = useContext(UserContext)
   
   const handleClick = () => {
+    if(!user) {
+      alert('로그인이 필요합니다.')
+      navigate('/')
+      return
+    }
     const cart = {id, image, title,  price, option: selected, quantity: 1 }
-    AddUpdateToCart(user.uid, cart)
+    upadateCart.mutate( cart)
     const answer = window.confirm(`상품이 장바구니에 담겼습니다.
     장바구니로 이동시하겠습니까?`)
     if( answer === true ) {

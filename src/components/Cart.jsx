@@ -1,13 +1,10 @@
 
-import React, { useContext } from 'react'
-import { UserContext } from '../context/UserContext'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { useQuery } from '@tanstack/react-query'
-import { getCart } from '../api/firebase'
-export default function Cart() {
-  const { user } = useContext(UserContext)
-  const {data: products} = useQuery(['carts'], () => getCart(user.uid))
 
+
+import useQueryHook from '../hooks/useQueryHook'
+export default function Cart() {
+  const { cartsData } = useQueryHook()
+  const {data: products} = cartsData
   return (
     <div className='relative'>
       장바구니

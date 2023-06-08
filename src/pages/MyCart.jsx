@@ -5,11 +5,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getCart } from '../api/firebase';
 import Price from '../components/Price';
 import CartItem from '../components/CartItem';
+import useQueryHook from '../hooks/useQueryHook';
 
 export default function MyCart() {
   const { user } = useContext(UserContext)
-  const {data: products} = useQuery(['carts'], () => getCart(user.uid))
-
+  // const {data: products} = useQuery(['carts'], () => getCart(user.uid))
+  const { cartsData }  = useQueryHook()
+  const { data:products} = cartsData
+  
   const hasCart = products && products.length > 0 
   const totalPrice = products && products.reduce((acc, cur) => {
     return acc + parseInt(cur.price) * cur.quantity
@@ -21,7 +24,7 @@ export default function MyCart() {
       {hasCart && 
       <>
         <ul className='border-b-2 p-2'>
-          {products && products.map(product => <CartItem key={product.id} product={product} user={user} />)}
+          {products && products.map(product => <CartItem key={product.id} product={product} />)}
         </ul>
         <div>
           <Price text='상품 총 금액' price={totalPrice} />

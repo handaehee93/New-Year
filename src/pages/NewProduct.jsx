@@ -1,29 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../components/ui/Button'
 import { uploadImage } from '../api/uploader'
-import { useNavigate } from 'react-router-dom'
-import { addNewProduct } from '../api/firebase'
-// import { useMutation } from 'react-query'
-import { useQueryClient,useMutation } from '@tanstack/react-query'
-import { UserContext } from '../context/UserContext'
+import useQueryHook from '../hooks/useQueryHook'
 
 
 export default function NewProduct() {
-
-
   const [product, setProduct] = useState({})
   // input태그 중에 사진을 올리는 input태그는 string이 아니라 url이므로 따로 state를 만들어 준 것
   const [file, setFile] = useState()
   const [isUploading, setIsUpLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const { addProduct } = useQueryHook()
 
-  const queryClient = useQueryClient()
-  const addProduct = useMutation(({product, url}) => addNewProduct(product, url),{
-    onSuccess: () => queryClient.invalidateQueries(['products'])
-  })
-  
-
-  
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsUpLoading(true)
@@ -35,21 +23,11 @@ export default function NewProduct() {
           setTimeout(() => {
             setSuccess(null)
           },3000)}})
-        // addNewProduct(product, url)
-        //   .then(() => {
-        //     setSuccess('제품 등록 완료')
-        //     setTimeout(() => {
-        //       setSuccess(null)
-        //     },3000)
-        //   })
       })
         .finally(() => {          
         setIsUpLoading(false)
-        // navigate('/')
       })
   }
-
-
 
 // input중 file 올리는 Input은 value가 파일 그 자체가 아니라, 파일의 주소 이므로 조건문 작성 해준 것
   const handleChange = (e) => {
@@ -64,11 +42,9 @@ export default function NewProduct() {
   const url = () => {
     return (
       URL.createObjectURL(file)
-      // window.URL.revokeObjectURL(file)
     )
   }
 
-const navigate = useNavigate()
 
   return (
     <section className='w-full text-center'>
@@ -123,9 +99,9 @@ const navigate = useNavigate()
           required 
         />
         <Button  text={isUploading ? '제품 등록 중' : '제품 등록 하기'} disabled={isUploading}/>
-        {success && <p className='my-2 font-bold'>🟢{success}</p>}
-
+        {success && <p className='my-2 font-bold'>😃{success}</p>}
       </form>
     </section>
   )
 }
+
