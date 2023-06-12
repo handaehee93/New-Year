@@ -9,8 +9,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
-        <Navbar />
-        <Outlet />
+        <div className='h-screen'>
+          <Navbar />
+          <Outlet />
+        </div>
+
       </UserContextProvider>
     </QueryClientProvider>
   );

@@ -6,7 +6,7 @@ import { getCart } from '../api/firebase';
 import Price from '../components/Price';
 import CartItem from '../components/CartItem';
 import useQueryHook from '../hooks/useQueryHook';
-
+import {BsQuestionLg} from 'react-icons/bs'
 export default function MyCart() {
   const { user } = useContext(UserContext)
   // const {data: products} = useQuery(['carts'], () => getCart(user.uid))
@@ -20,7 +20,11 @@ export default function MyCart() {
   return (
     <div className='p-7'>
       <p className='text-center text-bold text-xl pb-5 mb-3 border-b-2'>장바구니</p>
-      {!hasCart && <p>장바구니에 담겨 있는 상품이 없습니다.</p>}
+      {!hasCart && <>
+      <p className='text-center text-xl'>장바구니에 담겨 있는 상품이 없습니다.</p>
+      <BsQuestionLg className='m-auto text-3xl' />
+      </>
+      }
       {hasCart && 
       <>
         <ul className='border-b-2 p-2'>

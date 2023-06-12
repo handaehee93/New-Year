@@ -18,7 +18,7 @@ export default function Navbar() {
   const dropdownRef = useRef()
   useEffect(() => {
     const clickOutSide = (e) => {
-      if(!dropdownRef.current?.contains(e.target)) setIsOpen(false)
+      if(isOpen && !dropdownRef.current?.contains(e.target)) setIsOpen(false)
     }
     document.addEventListener("mousedown", clickOutSide)
     return () => document.removeEventListener("mousedown" , clickOutSide)
