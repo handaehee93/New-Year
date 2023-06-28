@@ -25,10 +25,18 @@ export default function Navbar() {
     document.addEventListener("mousedown", clickOutSide)
     return () => document.removeEventListener("mousedown", clickOutSide)
   }, [isOpen])
+  
+  useEffect(() => {
+    const clickOutSide = (e) => {
+      if (menuBar && !dropdownRef.current?.contains(e.target)) setMenubar(false)
+    }
+    document.addEventListener("mousedown", clickOutSide)
+    return () => document.removeEventListener("mousedown", clickOutSide)
+  }, [menuBar])
 
   return (
     <>
-      <header className='flex justify-between border-b border-gray-300 p-2'>
+      <header className='flex justify-between border-b border-gray-300 p-5'>
         <Link to='/' className='flex items-center font-semibold text-4xl  text-logo '>
           <HiOutlineShoppingBag className='max-sm:hidden' />
           <h1 className='max-sm:text-xl font-semibold' >NewYear</h1>
@@ -51,8 +59,7 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          {user && <Link to='/carts' ><Cart /></Link>}
-          <div className='relative p-2' onClick={() => setMenubar((prev) => !prev)}>
+          <div className='relative p-1' onClick={() => setMenubar((prev) => !prev)}>
             <GiHamburgerMenu className='w-10 h-10 ml-auto  sm:hidden' />
             {menuBar && (
             <div ref={dropdownRef} className='sm:hidden z-20 flex flex-col absolute top-11 bg-logo w-full text-white text-center p-2'>
@@ -62,6 +69,7 @@ export default function Navbar() {
             </div>
             )}
           </div>
+          {user && <Link to='/carts' ><Cart /></Link>}
           <Link to='/products/new' className='text-3xl'>
             {user && user.isAdmin && <AiFillEdit />}
           </Link>
@@ -71,20 +79,6 @@ export default function Navbar() {
           {user && <Button text={'Logout'} onClick={logout} />}
         </nav>
       </header>
-      {/* <div className='relative p-2' onClick={() => setMenubar((prev) => !prev)}>
-        <GiHamburgerMenu className='w-10 h-10 ml-auto mr-4 sm:hidden' />
-        {menuBar && (
-          <div ref={dropdownRef} className='sm:hidden z-20 flex flex-col absolute top-11 bg-logo w-full text-white text-center p-2'>
-            <Link to='/products' className='hover:bg-blue-400'>상품</Link>
-            <Link to='/products/male' className='hover:bg-blue-400'>남성</Link>
-            <Link to='/products/female' className='hover:bg-blue-400'>여성</Link>
-          </div>
-        )}
-      </div> */}
-
-
-
-
     </>
   )
 }
