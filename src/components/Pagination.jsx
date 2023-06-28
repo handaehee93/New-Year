@@ -5,7 +5,7 @@ export default function Pagination({totalData, postPerPage, setCurrentPage, curr
   for(let i=1; i <=Math.ceil(totalData/postPerPage); i++) {
     pages.push(i)
   }
-  console.log(pages.length)
+
   return (
     <div className='text-center h-16 relative -translate-y-full'>
       {

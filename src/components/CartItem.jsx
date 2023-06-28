@@ -30,8 +30,35 @@ export default function CartItem({product}) {
           <p className='text-lg'>{title}</p>
           <p className='text-xl font-bold'>사이즈 : {option}</p>
           <p className='text-xl'>₩{editprice}</p>
+          <div className='sm:hidden text-xs flex gap-2 items-center'>
+            <Button 
+              className='cursor-pointer transition-all hover:text-logo mx-1' text='-' 
+              onClick={handleMinus} 
+            />
+            <span>{quantity}</span>
+            <Button 
+              className='cursor-pointer transition-all hover:text-logo mx-1' 
+              text='+' 
+              onClick={handlePlus} 
+            />
+            <div className='max-sm:hidden'>
+              <Button 
+                className='w-0 cursor-pointer transition-all hover:text-logo mx-1' 
+                text='삭제' 
+                onClick={handleDelete} 
+              />
+            </div>
+            <div className='sm:hidden'>
+              <Button 
+                className='w-0 cursor-pointer transition-all hover:text-logo mx-1' 
+                text='X' 
+                onClick={handleDelete} 
+              />
+            </div>
+
+          </div>
         </div>
-        <div className='text-2xl flex  gap-2 items-center'>
+        <div className='max-sm:hidden text-xl flex gap-2 items-center'>
           <Button 
             className='cursor-pointer transition-all hover:text-logo mx-1' text='-' 
             onClick={handleMinus} 
@@ -42,11 +69,21 @@ export default function CartItem({product}) {
             text='+' 
             onClick={handlePlus} 
           />
-          <Button 
-            className='cursor-pointer transition-all hover:text-logo mx-1' 
-            text='삭제' 
-            onClick={handleDelete} 
-          />
+          <div className='max-sm:hidden'>
+            <Button 
+              className='w-0 cursor-pointer transition-all hover:text-logo mx-1' 
+              text='삭제' 
+              onClick={handleDelete} 
+            />
+          </div>
+          <div className='sm:hidden'>
+            <Button 
+              className='w-0 cursor-pointer transition-all hover:text-logo mx-1' 
+              text='x' 
+              onClick={handleDelete} 
+            />
+          </div>
+
         </div>
       </div>
     </li>

@@ -13,7 +13,7 @@ import NotFound from './pages/NotFound';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Male from './pages/Male';
 import Female from './pages/Female';
-// import ProtectedRoute from './pages/ProtectedRoute';
+
 
 const router = createBrowserRouter([
   {

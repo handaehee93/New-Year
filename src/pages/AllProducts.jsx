@@ -14,7 +14,6 @@ export default function AllProducts() {
   return (
     <>
     <div className='h-auto min-h-full'>
-      {/* <Banner/> */}
       <Products curPage={currentPage} currentProducts={currentProducts} />
     </div>
     <Pagination 
