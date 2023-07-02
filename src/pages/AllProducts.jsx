@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import Products from '../components/Products'
-import Banner from '../components/ui/Banner'
 import Pagination from '../components/Pagination'
 import useQueryHook from '../hooks/useQueryHook'
 import { PaginationHooks } from '../hooks/PaginationHooks'
@@ -13,16 +11,15 @@ export default function AllProducts() {
 
   return (
     <>
-    <div className='h-auto min-h-full'>
-      <Products curPage={currentPage} currentProducts={currentProducts} />
-    </div>
-    <Pagination 
-      totalData={products && products.length} 
-      postPerPage={postPerPage} 
-      setCurrentPage={setCurrentPage}
-      currentPage={currentPage}
-    />
-    
+      <div className='h-auto min-h-full'>
+        <Products curPage={currentPage} currentProducts={currentProducts} />
+      </div>
+      <Pagination 
+        totalData={products && products.length} 
+        postPerPage={postPerPage} 
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
     </>
 
 )

@@ -9,7 +9,7 @@ export default function ProductCard({product}) {
   return (
     <li 
       onClick={() => navigate(`/products/${id}`, {state: {product:product}})} 
-      className='rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 '
+      className=' rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 '
     >
       <img className='w-full' src={image}/>
       <div className='mt-2 px-2 text-lg  justify-between items-center'>

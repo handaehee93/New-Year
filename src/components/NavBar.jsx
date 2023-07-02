@@ -42,7 +42,7 @@ export default function Navbar() {
           <h1 className='max-sm:text-xl font-semibold' >NewYear</h1>
         </Link>
         <nav className='flex items-center gap-4 font-semibold'>
-          <Link to='/products' className='hidden sm:block'>상품</Link>
+          <Link to='/products' className='hidden sm:block'>전체 상품</Link>
           <div className='relative flex flex-col items-center cursor-pointer'>
             <div className='sm:flex items-center hidden' onClick={() => setIsOpen((prev) => !prev)}>
               카테고리
@@ -63,7 +63,7 @@ export default function Navbar() {
             <GiHamburgerMenu className='w-10 h-10 ml-auto  sm:hidden' />
             {menuBar && (
             <div ref={dropdownRef} className='sm:hidden z-20 flex flex-col absolute top-11 bg-logo w-full text-white text-center p-2'>
-            <Link to='/products' className='hover:bg-blue-400'>상품</Link>
+            <Link to='/products' className='hover:bg-blue-400'>전체</Link>
             <Link to='/products/male' className='hover:bg-blue-400'>남성</Link>
             <Link to='/products/female' className='hover:bg-blue-400'>여성</Link>
             </div>

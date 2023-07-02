@@ -1,15 +1,9 @@
-import React, { useContext } from 'react'
 import Button from '../components/ui/Button';
-import { UserContext } from '../context/UserContext';
-import { useQuery } from '@tanstack/react-query';
-import { getCart } from '../api/firebase';
 import Price from '../components/Price';
 import CartItem from '../components/CartItem';
 import useQueryHook from '../hooks/useQueryHook';
 import {BsQuestionLg} from 'react-icons/bs'
 export default function MyCart() {
-  const { user } = useContext(UserContext)
-  // const {data: products} = useQuery(['carts'], () => getCart(user.uid))
   const { cartsData }  = useQueryHook()
   const { data:products} = cartsData
   

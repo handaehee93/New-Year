@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Banner from '../components/ui/Banner'
 import Products from '../components/Products'
 import Pagination from '../components/Pagination'
